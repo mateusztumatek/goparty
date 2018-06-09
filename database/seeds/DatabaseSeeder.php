@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
 	        CitiesTableSeeder::class,
             UsersTableSeeder::class,
 	        ClubsTableSeeder::class,
-	        EventsTableSeeder::class
+	        EventsTableSeeder::class,
+	        UserSettingsSeeder::class
         ]);
 
     }
