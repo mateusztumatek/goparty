@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Events;
 
 use App\EventAttendance;
+use App\Events\NotificationEvent;
 use App\Models\Club;
 use App\Models\Event;
 use Carbon\Carbon;
@@ -125,15 +126,19 @@ class EventsUserController extends Controller
     	if(!Auth::check()){
     		return view('auth.login');
 	    } else {
-		    $eventAttendance = EventAttendance::create( [
-			    'user_id' => Auth::id(),
-			    'event_id' => $request->event_id,
-			    'status' => 1
-		    ] );
+            $eventAttendance = EventAttendance::create([
+                'user_id' => Auth::id(),
+                'event_id' => $request->event_id,
+                'status' => 1
+            ]);
 
-		    $events = EventAttendance::where('user_id', Auth::id())->get();
-		    return view('dashboard.events.attendance', compact('events'));
-	    }
+            $events = EventAttendance::where('user_id', Auth::id())->get();
+            $event_user = (Event::findOrFail($request->event_id))->user_id;
+            event(new NotificationEvent($event_user, Auth::id(), null, $request->event_id, 'event-attendance', null));
+            return view('dashboard.events.attendance', compact('events'));
+
+        }
+
 
 
 	}

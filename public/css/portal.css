@@ -6,6 +6,12 @@ a {
   text-decoration: none !important;
   color: #ef3ab1; }
 
+.pink-color {
+  color: #ef3ab1 !important; }
+
+.xxx {
+  display: none; }
+
 body {
   font-family: Muli;
   margin: 0px !important;

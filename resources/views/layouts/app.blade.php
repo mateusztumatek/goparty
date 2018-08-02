@@ -16,7 +16,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset ('css/all.css')}}" rel="stylesheet">
-
+    <link href="{{asset('css/notifications.css')}}" rel="stylesheet">
+    <link href="{{asset('css/rating.css')}}" rel="stylesheet">
 {{--<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">--}}
 {{--<link href="{{ asset('css/portal.css') }}" rel="stylesheet">--}}
 {{--<link href="{{ asset('css/events.css') }}" rel="stylesheet">--}}
@@ -78,6 +79,9 @@
     var token = '{{csrf_token()}}';
     var club_rate = '{{route('club.rate')}}';
     var club_rate_delete = '{{route('club.rate.delete')}}';
+    var markNotOpenForm = '{{route('markNotOpen.notifications')}}';
+
+
 </script>
 
 

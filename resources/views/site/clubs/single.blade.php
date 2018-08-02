@@ -8,7 +8,7 @@
 
             <div class="club-border"> </div>
             <div class="col-lg-5">
-                <img class="img-fluid"
+                <img class="img-fluid" onclick="loadGallery(this)" data-target="photos" data-toggle="modal"
                      src="@if($club->club_img) {{ url('/uploads/clubs/' . $club->club_img )  }} @else {{url('/img/default-event-img.jpg')}} @endif " alt="">
                 {{--@if(empty($club->getMain($club->id)))--}}
                     {{--<p>Ten klub nie ma jeszcze dodanych zdjęć</p>--}}
@@ -37,7 +37,29 @@
                 <p id="description">
                     Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
                 </p>
+
                 <div class="description-footer" >
+                    <div class="rate" style="display: grid">
+                    @auth
+                    <form action="{{route('club.rate')}}">
+                        <input name="club" value="{{$club->id}}" type="hidden">
+                        <input name="user" value="{{\Illuminate\Support\Facades\Auth::id()}}" type="hidden">
+
+                        <fieldset @if(($rate = $club->getRate(\Illuminate\Support\Facades\Auth::user())) != null) data-rate = '{{$rate->rate}}' @endif class="rating">
+
+                            <input  onclick="document.getElementById('Like_form').submit()" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Very Nice - 5 stars"></label>
+                            <input onclick="document.getElementById('Like_form').submit()" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Good - 4 stars"></label>
+                            <input onclick="document.getElementById('Like_form').submit()" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+                            <input onclick="document.getElementById('Like_form').submit()" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                            <input onclick="document.getElementById('Like_form').submit()" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+
+                        </fieldset>
+                    </form>
+
+                    </div>
+                    @endauth
                     <a href="#" ><i class="fa fa-globe" style="margin-right: 5px"> </i> <span style="color: white; ">wojewodztwo: </span>{{$club->voivodeship}} </a>
                     <a href="#" ><i class="fa fa-globe" style="margin-right: 5px"> </i> <span style="color: white; ">Ulica: </span>{{$club->route}}{{$club->street_number}} </a>
                 </div>
@@ -130,6 +152,8 @@
                 <div class="col-lg-12 text-center">
                     <h3>Wydarzenia w tym klubie: </h3>
                 </div>
+                @if(!$events->isEmpty())
+
                 <div id="event-carousel" class="carousel carousel-events slide carousel-fade" data-ride="carousel" >
                     <div class="carousel-inner">
                         @php
@@ -186,7 +210,11 @@
                     </a>
 
                 </div>
-
+                @else
+                    @if(\Illuminate\Support\Facades\Auth::id() == $club->user_id)
+                     <a href="{{route('events.create', ['club' => $club->id])}}"> dodaj wydarzenie do tego klubu </a>
+                    @endif
+                @endif
             </div>
         </div>
 

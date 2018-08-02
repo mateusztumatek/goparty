@@ -103,8 +103,8 @@ Route::get('search/clubs', 'SearchController@search_clubs');
 Route::post('take-part', 'Events\EventsUserController@takePart');
 Route::delete('take-part', 'Events\EventsUserController@cancelEvent');
 
-
-
+Route::post('markNotOpen-notifications', 'NotificationController@markNotOpen')->name('markNotOpen.notifications');
+Route::post('mark-notifications', 'NotificationController@mark')->name('mark.notifications');
 Route::get('take-part', 'API\EventsController@checkIfExistAttendance');
 
 

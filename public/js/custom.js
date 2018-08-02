@@ -169,6 +169,8 @@ function next() {
 
 
 }
+
+
 function prev() {
     var current_slide = document.getElementsByClassName('club-center')[0];
     var next_slide = document.getElementsByClassName('club-next')[0];
@@ -207,7 +209,19 @@ function prev() {
     }, 50);
 }
 $('.card-slider').onload = init_slider();
+function  markNotOpen(id, element) {
 
+   var dataForm = new FormData();
+   dataForm.append('notification_id', id);
+    $.ajax({
+        method: 'POST',
+        url: markNotOpenForm,
+        data: dataForm,
+
+
+    })
+
+}
 function init_slider() {
 
     var count = 1;
@@ -248,6 +262,7 @@ $(window).ready(function () {
 })
 
 $("fieldset").each(function () {
+
     if(this.hasAttribute('data-rate')){
         init_rate(this, this.getAttribute('data-rate'));
     }
@@ -382,10 +397,11 @@ $(function () {
     });
     $('.full').click(function () {
         var input = this.previousSibling;
+        var form = $(this).closest('form');
 
         var myData = new FormData();
-        myData.append('club_id', input.dataset.club);
-        myData.append('user_id', input.dataset.user);
+        myData.append('club_id', document.getElementsByName('club')[0].value);
+        myData.append('user_id', document.getElementsByName('user')[0].value);
         myData.append('rate', input.value);
         $.ajax({
             method: 'POST',
@@ -416,6 +432,39 @@ $(function () {
     })
     $('[data-toggle="tooltip"]').tooltip();
 
+
+    $('#notifications-trigger').on('click', function () {
+        console.log($('#notifications').css('display'));
+        if($('#notifications').css('display') == 'none'){
+
+            $('#notifications').show('fade', 100);
+            $(this).addClass('muted');
+            $('#notifications-trigger-i').addClass('c-white');
+            var values =  $("input[name='notifications[]']").map(function(){return $(this).val();}).get();
+            var myForm = new FormData();
+            console.log({notifications:values});
+            myForm.append('notifications[]', values);
+
+
+            $.ajax({
+                url: $('#mark-Notifications').attr('action'),
+                method: 'POST',
+                data: {notifications:values},
+
+            }).done(function (msg) {
+
+            })
+
+        } else {
+            $(this).removeClass('muted');
+            $('#notifications').hide('fade', 100);
+            $('.notifiactions-item').each(function () {
+                $(this).addClass('muted');
+            })
+
+
+        }
+    })
     $('.remove_rate').click(function () {
         var button = this;
         var myForm = new FormData();

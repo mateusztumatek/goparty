@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
+use App\Models\Club;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,8 @@ class RatingController extends Controller
            'club_id' => $request->club_id,
            'rate' => $request->rate
         ]);
+
+       event( new NotificationEvent((Club::findOrFail($request->club_id))->user_id, Auth::id(), $request->club_id, null, 'rate', $request->rate));
 
         return response()->json($rate);
 

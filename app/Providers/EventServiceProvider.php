@@ -25,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ClubDestroy' => [
 	        'App\Listeners\ClubDestroy\RemoveRole'
         ],
+        'App\Events\NotificationEvent' => [
+            'App\Listeners\MakeNotification'
+
+        ]
     ];
 
     /**

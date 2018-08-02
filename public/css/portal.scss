@@ -8,12 +8,21 @@ $white-color: #FFF;
 
 /* Fonts */
 $secondary-font: 'Muli', sans-serif;
+
+
+
 a {
   cursor: pointer;
   text-decoration: none !important;
   color: $pink-color;
 }
+.pink-color{
+  color: $pink-color !important;
+}
 
+.xxx{
+  display: none;
+}
 body {
   font-family: Muli;
   margin: 0px !important;

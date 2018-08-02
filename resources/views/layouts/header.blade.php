@@ -29,6 +29,9 @@
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Logowanie') }}</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">{{ __('Rejestracja') }}</a></li>
                 @else
+                    <li class="nav-item @if(!\Illuminate\Support\Facades\Auth::user()->getNotifications()->isEmpty()) active @endif"  style="position:relative;">
+                        @include('layouts.notifications')
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -60,6 +63,7 @@
                             </form>
                         </div>
                     </li>
+
                 @endguest
                 <li><a class="nav-link" href="{{ route('clubs.create') }}">{{ __('Dodaj klub') }}</a></li>
             </ul>

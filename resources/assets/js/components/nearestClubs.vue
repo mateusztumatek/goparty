@@ -9,10 +9,11 @@
             <div v-for="club in clubs.data" class="col-12 col-md-3 mb-2">
                 <div>
                     <img class="img-fluid" src="http://localhost/goparty/public/img/klub1.jpg" alt="">
-                    <a :href="'/clubs/' + club.id">
+                    <a :href="'clubs/' + club.id">
                         <h4 class="text-white"> {{ club.official_name}} (
                             {{ getDistanceFromLatLonInKm(position.latitude, position.longitude, club.latitude, club.longitude) }}
                              km)</h4>
+                        <small>{{club.locality}}</small>
                     </a>
                 </div>
             </div>
@@ -59,6 +60,9 @@
         },
         methods: {
             getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+                console.log('szerokosc' + lat1);
+                console.log('wysokosc' + lon1);
+
                 let R = 6371; // Radius of the earth in km
                 let dLat = this.deg2rad(lat2-lat1);  // deg2rad below
                 let dLon = this.deg2rad(lon2-lon1);

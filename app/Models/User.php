@@ -125,4 +125,10 @@ class User extends Authenticatable
     public function filtrEventsByUserSettings($events){
 
     }
+
+    public function getNotifications(){
+        $notifications = Notification::where('user_id', $this->id)->OrderBy('created_at', 'DESC')->get();
+
+        return $notifications;
+    }
 }

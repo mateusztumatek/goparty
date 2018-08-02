@@ -34,7 +34,7 @@
 
             <div class="col-lg-7" style="padding-top: 0px;">
 
-                <h2 style="margin-top: 0px;" class="text-center">{{$club->official_name}}</h2>
+                <h2 style="margin-top: 0px;" class="text-center">{{$club->official_name}} sasawa</h2>
                 <hr>
                 <p id="description">
                     Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker

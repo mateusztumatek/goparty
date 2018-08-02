@@ -165,11 +165,7 @@ $white-color: #FFF;
 
 #event-list .card{
   transition: .3s;
-  &:hover{
-    transform: scale(1.03);
-    cursor: pointer;
 
-  }
   color: #FFF;
   background: rgba(0,0,0,0.5);
   .card-body{

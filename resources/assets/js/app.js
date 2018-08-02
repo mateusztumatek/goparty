@@ -17,7 +17,6 @@ import 'jquery-ui/ui/widgets/autocomplete.js';
 import 'jquery-ui/ui/widgets/resizable.js';
 
 window.jquery_ui = require('jquery-ui');
-11
 window.Vue = require('vue');
 
 /**
