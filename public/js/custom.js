@@ -368,8 +368,9 @@ $(function () {
 
     })
     $('#search-club').autocomplete({
+
         source: 'http://localhost/goparty/public/search/autocomplete',
-        minLength: 1,
+        minLength: 2,
         select: function( event, ui ) {
             window.location.href = 'http://localhost/goparty/public/clubs/'+ ui.item.id;
         },
